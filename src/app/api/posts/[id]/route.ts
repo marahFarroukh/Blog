@@ -4,9 +4,7 @@ import { postSchema } from "@/app/utils/validationSchemas";
 
 import { NextRequest, NextResponse } from "next/server";
 
-interface Props {
-  params: { id: string };
-}
+
 
 /**
  * @method GET
@@ -15,28 +13,37 @@ interface Props {
  * @access public
  */
 
-export async function GET(request: NextRequest, { params }: Props) {
-  try {
-    const posts = await prisma.post.findUnique({
-      where: { id: parseInt(params.id) },
-    });
-    if (!posts) {
-      return NextResponse.json(
-        { message: "artical not found" },
-        { status: 404 }
-      );
-    }
 
-    return NextResponse.json(posts, { status: 201 });
-  } catch (error) {
-    return NextResponse.json(
-      {
-        message: "internal server error",
-      },
-      { status: 500 }
-    );
-  }
-}
+   interface Props {
+     params: {
+       id: string;
+     };
+   }
+
+   export async function GET(request: NextRequest, { params }: Props) {
+     try {
+       const posts = await prisma.post.findUnique({
+         where: { id: parseInt(params.id) },
+       });
+       if (!posts) {
+         return NextResponse.json(
+           { message: "article not found" },
+           { status: 404 }
+         );
+       }
+
+       return NextResponse.json(posts, { status: 200 }); // استخدام 200 بدلاً من 201 لنجاح الطلب
+     } catch (error) {
+       return NextResponse.json(
+         {
+           message: "internal server error",
+         },
+         { status: 500 }
+       );
+     }
+   }
+   
+
 
 /**
  * 
