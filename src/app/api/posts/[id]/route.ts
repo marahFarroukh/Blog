@@ -6,12 +6,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 
 
-/**
- * @method GET
- * @route ~/api/posts/:id
- * @description Get Single Post By Id
- * @access public
- */
 
 
    interface Props {
@@ -45,11 +39,7 @@ import { NextRequest, NextResponse } from "next/server";
    
 
 
-/**
- * 
- @method PUT
- @route  
- */
+
 
 export async function PUT(request: NextRequest, { params }: Props) {
   try {
@@ -86,12 +76,6 @@ export async function PUT(request: NextRequest, { params }: Props) {
   }
 }
 
-/**
-@method DELETE
-@route ~/api/articals/:id
-@desc Delete Artical
-@access private (only admin can delete artical)
- */
 
 export async function DELETE(request: NextRequest, { params }: Props) {
   try {
